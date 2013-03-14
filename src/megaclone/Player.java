@@ -1,5 +1,7 @@
 package megaclone;
 
+import java.util.Scanner;
+
 public class Player extends Entity{
 	private  Input i; 
 	public Player(SpriteSheet spriteDB, Input i){
@@ -28,12 +30,31 @@ public class Player extends Entity{
 	 * 
 	 */
 	
-	public void translateInput()
+	public void spriteChange()
 	{
-		 int s;
-		 int d;
+		Scanner scan = new Scanner(currentSpriteKey);
+		//should avoid flying exceptions.
+		scan.useDelimiter(":");
+		 int s = scan.nextInt();
+		 int d = scan.nextInt();;
 		 
 		 //translation from input
+		 if(moveX != 0)
+		 {
+			 s = 1;
+			 if(moveX < 0)
+			 {
+				 d = 3;
+			 }
+			 if(moveX > 0)
+			 {
+				 d = 5;
+			 }
+		 }
+		 if(moveY != 0)
+		 {
+			 s = 2;
+		 }
 		 
 		 String key = "" + s + ":" + d;
 		 if(!key.equals(currentSpriteKey))

@@ -152,10 +152,13 @@ public class ResourceLoader {
 		return ret;
 		
 	}
+	
+	/*
 	public Enemy loadEnemy(Element enemyElem) {
 		Enemy e;
 		
 	}
+	*/
 	public Player loadPlayer(Element playerElem) {
 		Player p;
 		

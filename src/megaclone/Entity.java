@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.TreeMap;
 
-public class Entity extends Collideable{
+public abstract class Entity extends Collideable{
 	protected SpriteSheet spriteDB;
 	private Sprite currentSprite;
 	protected String currentSpriteKey;
@@ -28,9 +28,16 @@ public class Entity extends Collideable{
 		/*
 		 * okie, collision will go here laterz
 		 */
+		
+		spriteChange();
 		currentSprite.update(g, x, y, timeLastUpdated);
 		move();
 	}
+	
+	/**
+	 * Method to allow for spritechanging to occur in the update of this class AFTER collision.
+	 */
+	public abstract void spriteChange();
 	
 	public void collision(Collideable c)
 	{
