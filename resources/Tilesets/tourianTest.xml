@@ -1,0 +1,23 @@
+<tileset name="tourianTest" src="Resources/TileSets/tourianTestTiles.xml">
+	<tile index="-1" solid="0, 0, 0, 0"/>
+	<tile index="23" solid="1, 1, 1, 1"/>
+	<tile index="24" solid="1, 1, 1, 1"/>
+	<tile index="25" solid="1, 1, 1, 1"/>
+	<tile index="26" solid="1, 1, 1, 1"/>
+	<tile index="27" solid="1, 1, 1, 1"/>
+	<tile index="28" solid="1, 1, 1, 1"/>
+	<tile index="75" solid="1, 1, 1, 1"/>
+	<tile index="92" solid="1, 1, 1, 1"/>
+	<tile index="77" solid="1, 1, 1, 1"/>
+	<tile index="37" solid="1, 1, 1, 1"/>
+	<tile index="39" solid="1, 1, 1, 1"/>
+	<tile index="91" solid="1, 1, 1, 1"/>
+	<tile index="40" solid="1, 1, 1, 1"/>
+	<tile index="41" solid="1, 1, 1, 1"/>
+	<tile index="42" solid="1, 1, 1, 1"/>
+	<tile index="43" solid="1, 1, 1, 1"/>
+	<tile index="44" solid="1, 1, 1, 1"/>
+	<tile index="45" solid="1, 1, 1, 1"/>
+	<tile index="123" solid="1, 1, 1, 1"/>
+	<tile index="139" solid="1, 1, 1, 1"/>
+</tileset>

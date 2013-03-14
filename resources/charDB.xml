@@ -1,0 +1,39 @@
+<CharDB>
+  <Character id = "1" name ="Geminga" entityType = "Player">
+    <spritesheet name = "Character" sizeT = "8" sizeST = "15" src = "Resources/player.xml">
+      <sprite name = "SamusTestStandingR" type = "0" subType = "5"/>
+      <sprite name = "SamusTestStandingL" type = "0" subType = "3"/>
+      
+      <sprite name = "SamusTestRunningRs6" type = "1" subType = "5"/>
+      <sprite name = "SamusTestRunningLs4" type = "1" subType = "3"/>
+
+      <sprite name ="SamusTestStandingR" type ="2" subType ="5"></sprite>
+      <sprite name ="SamusTestStandingL" type ="2" subType ="3"></sprite>
+      
+    </spritesheet>
+    <armaments>
+		<weapon id="0" name = "G-Buster" charges="true">
+			<charge name = "GemSmallShot" sizex ="1" sizey ="9" chargeLevel = "0">
+				<sprite name="GemSmallShot1" type ="1"/>
+				<sprite name="GemSmallShot2" type ="2"/>
+				<sprite name="GemSmallShot3" type ="3"/>
+				<sprite name="GemSmallShot4" type ="4"/>
+				<sprite name="GemSmallShot6" type ="5"/>
+				<sprite name="GemSmallShot7" type ="6"/>
+				<sprite name="GemSmallShot8" type ="7"/>
+				<sprite name="GemSmallShot9" type ="8"/>
+			</charge>
+			<charge name = "GemMedShot" sizex ="1" sizey="9" chargeLevel = "40">
+				<sprite name="GemMedShot1" type ="1"/>
+				<sprite name="GemMedShot2" type ="2"/>
+				<sprite name="GemMedShot3" type ="3"/>
+				<sprite name="GemMedShot4" type="4"/>
+				<sprite name="GemMedShot6" type="5"/>
+				<sprite name="GemMedShot7" type="6"/>
+				<sprite name="GemMedShot8" type="7"/>
+				<sprite name="GemMedShot9" type="8"/>
+			</charge>
+		</weapon>
+    </armaments>
+  </Character>
+</CharDB>

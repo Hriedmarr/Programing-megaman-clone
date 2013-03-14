@@ -1,0 +1,60 @@
+<!--name is shape-height-width-details -->
+<!--push is value to apply to character's movement when contacted.-->
+
+<tileshapes>
+	<tileshape name = "box-full-full-def" id = "0">
+		<side num = "0" pass = "false">
+			<point x = "0" y = "0"/>
+			<point x = "16" y = "0"/>
+		</side>
+		<side num = "1" pass = "false">
+			<point x = "16" y = "0"/>
+			<point x = "16" y = "16"/>
+		</side>
+		<side num = "2" pass = "false">		
+			<point x = "16" y = "16"/>
+			<point x = "0" y = "16"/>
+		</side>
+		<side num = "3" pass = "false">
+			<point x = "0" y = "16"/>
+			<point x = "0" y = "0"/>
+		</side>
+	</tileshape>
+	<tileshape name = "box-full-full-topHSR" id = "0">
+		<side num = "0" pass = "false" push = "-1.0">
+			<point x = "0" y = "8"/>
+			<point x = "16" y = "0"/>
+		</side>	
+		<side num = "1" pass = "false">
+			<point x = "16" y = "0"/>
+			<point x = "16" y = "16"/>
+		</side>
+		<side num = "2" pass = "false">		
+			<point x = "16" y = "16"/>
+			<point x = "0" y = "16"/>
+		</side>
+		<side num = "3" pass = "false">
+			<point x = "0" y = "16"/>
+			<point x = "0" y = "8"/>
+		</side>
+	</tileshape>
+	<tileshape name = "tri-half-full-topHSR" id = "0">
+		<side num = "0" pass = "false" push = "-1.0">
+			<point x = "0" y = "16"/>
+			<point x = "16" y = "8"/>
+		</side>	
+		<side num = "1" pass = "false">
+			<point x = "16" y = "8"/>
+			<point x = "16" y = "16"/>
+		</side>
+		<side num = "2" pass = "false">		
+			<point x = "16" y = "16"/>
+			<point x = "0" y = "16"/>
+		</side>
+		<!--This is the same as side 0, because player will be moving down and right onto those sides. BE SURE TO MOVE THE PLAYER UP WHEN COLLIDING WITH THESE SIDES-->
+		<side num = "3" pass = "false">
+			<point x = "0" y = "16"/>
+			<point x = "16" y = "8"/>
+		</side>
+	</tileshape>
+</tileshapes>

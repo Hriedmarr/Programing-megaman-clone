@@ -1,0 +1,11 @@
+<resources>
+	<tileset name="TourianTest">
+		<image file="Resources/TileSets/tourian1mainaf5.bmp">
+			<grid
+				pos="1, 1"
+				size="16, 16"
+				array="17, 18"
+				spacing="1, 1" />
+		</image>
+	</tileset>
+</resources>

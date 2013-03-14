@@ -1,0 +1,11 @@
+<resources>
+	<sprite name="Tile0">
+		<image file="tourian1mainaf5.bmp">
+			<grid
+				pos="86, 35"
+				size="16, 16"
+				array="1, 1"
+				spacing="0, 0" />
+		</image>
+	</sprite>
+</resources>

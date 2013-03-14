@@ -1,0 +1,299 @@
+<resources>
+<!--87x35 27 6  -->
+<sprite name="SamusTestStandingR">
+	<image file="Resources/metroidzeromission_samus-gravitysuit_sheet.png">
+		<grid
+			pos="204, 152"
+			size="29, 35"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="250"
+			repMode="loop" />
+</sprite>
+<sprite name="SamusTestRunningRs6">
+	<image file="Resources/metroidzeromission_samus-gravitysuit_sheet.png">
+		<grid
+			pos="208, 371"
+			size="39, 37"
+			array="5, 2"
+			spacing="0, 13" />
+	</image>
+	<animation
+			speed="250"
+			repMode="loop" />
+</sprite>
+<sprite name="SamusTestRunningLs4">
+	<image file="Resources/metroidzeromission_samus-gravitysuit_sheet.png">
+		<grid
+			pos="6, 371"
+			size="38, 37"
+			array="5, 2"
+			spacing="0, 13" />
+	</image>
+	<animation
+			speed="250"
+			repMode="loop" />
+</sprite>
+<sprite name="SamusTestStandingRs9">
+	<image file="Resources/metroidzeromission_samus-gravitysuit_sheet.png">
+		<grid
+			pos="296, 100"
+			size="25, 40"
+			array="3, 1"
+			spacing="5, 0" />
+	</image>
+		<animation
+				speed="250"
+				repMode="loop" />
+</sprite>
+<sprite name="SamusTestStandingRs3">
+	<image file="Resources/metroidzeromission_samus-gravitysuit_sheet.png">
+		<grid
+			pos="297, 152"
+			size="24, 35"
+			array="3, 1"
+			spacing="6, 0" />
+	</image>
+	<animation
+			speed="250"
+			repMode="loop" />
+</sprite>
+<sprite name="SamusTestStandingL">
+	<image file="Resources/metroidzeromission_samus-gravitysuit_sheet.png">
+		<grid
+			pos="114, 152"
+			size="29, 35"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="250"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemSmallShot1"
+	base_angle="180" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 6"
+			size="10, 10"
+			array="3, 1"
+			spacing="4, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemSmallShot2"
+	base_angle="90"	>
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="13, 18"
+			size="11, 7"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemSmallShot3"
+	base_angle="270" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 6"
+			size="10, 10"
+			array="3, 1"
+			spacing="4, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemSmallShot4"
+	base_angle="180"	>
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="13, 18"
+			size="11, 7"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemSmallShot6"
+	base_angle="0"	>
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="13, 18"
+			size="11, 7"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemSmallShot7"
+	base_angle="90" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 6"
+			size="10, 10"
+			array="3, 1"
+			spacing="4, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemSmallShot8"
+	base_angle="270"	>
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="13, 18"
+			size="11, 7"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemSmallShot9"
+	base_angle="0" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 6"
+			size="10, 10"
+			array="3, 1"
+			spacing="4, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemMedShot1"
+	base_angle="180" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 29"
+			size="18, 18"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemMedShot2"
+	base_angle="90"	>
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 49"
+			size="22, 9"
+			array="3, 1"
+			spacing="10, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemMedShot3"
+	base_angle="270" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 29"
+			size="18, 18"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemMedShot4"
+	base_angle="180">
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 49"
+			size="22, 9"
+			array="3, 1"
+			spacing="10, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemMedShot6"
+	base_angle="0">
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 49"
+			size="22, 9"
+			array="3, 1"
+			spacing="10, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemMedShot7"
+	base_angle="90" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 29"
+			size="18, 18"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite 
+	name="GemMedShot8"
+	base_angle="270">
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 49"
+			size="22, 9"
+			array="3, 1"
+			spacing="10, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+<sprite
+	name="GemMedShot9"
+	base_angle="0" >
+	<image file="Resources/G-Weaponry.png">
+		<grid
+			pos="10, 29"
+			size="18, 18"
+			array="3, 1"
+			spacing="1, 0" />
+	</image>
+	<animation
+			speed="200"
+			repMode="loop" />
+</sprite>
+</resources>
