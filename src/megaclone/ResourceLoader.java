@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import org.w3c.dom.*;
 public class ResourceLoader {
-	public Document loadDoc(String doc) {
+	public static Document loadDoc(String doc) {
 		File resource = new File(doc);
 		DocumentBuilder db;
 		try {
@@ -20,7 +20,7 @@ public class ResourceLoader {
 		}catch(Exception ex) {ex.printStackTrace();}
 		return null;
 	}	
-	public SpriteSheet loadSpriteSheet(Element sheetTemplate) {
+	public static SpriteSheet loadSpriteSheet(Element sheetTemplate) {
 		//Load data from sheet template
 		String ssName = sheetTemplate.getAttribute("name");
 		String ssSizeT = sheetTemplate.getAttribute("sizeT");
@@ -48,7 +48,7 @@ public class ResourceLoader {
 		}
 		return ret;
 	}
-	public Sprite loadSprite(Element spriteElem) {
+	public static Sprite loadSprite(Element spriteElem) {
 		NodeList nodec = spriteElem.getChildNodes();
 		Element imageNode = (Element)nodec.item(0);
 		String imageFile = imageNode.getAttribute("file");
@@ -122,7 +122,7 @@ public class ResourceLoader {
 		}
 	}
 	/*
-	public void loadTileSheet(String doc) {
+	public static void loadTileSheet(String doc) {
 		Document d = loadDoc(doc);
 		NodeList nodes = d.getElementsByTagName("sprite");
 		for(int i = 0; i < nodes.getLength(); i++) {
@@ -130,37 +130,50 @@ public class ResourceLoader {
 			System.out.println(node.getAttribute("name"));
 		}
 	}
-	public void loadTile(Element spriteElem) {
+	public static void loadTile(Element spriteElem) {
 		NodeList nodec = spriteElem.getChildNodes();
 		Element imageNode = (Element)nodec.item(0);
 		String tileScale = imageNode.getAttribute("scale");
 	}
 	*/
-	public Entity loadEntity(Element entityElem) {
-		Entity ret;
-		NodeList nodec = entityElem.getChildNodes();
-		Element charNode = (Element)nodec.item(0);
-		String idAtt = charNode.getAttribute("id");
-		String nameAtt = charNode.getAttribute("name");
-		String entity = charNode.getAttribute("entityType");
-		if(entity.equals("Player")) {
-			ret = loadPlayer(charNode);
-		}
-		if(entity.equals("Enemy")){
-			ret = loadEnemy(charNode);
-		}
-		return ret;
-		
-	}
 	
 	/*
-	public Enemy loadEnemy(Element enemyElem) {
+	public static Enemy loadEnemy(Element enemyElem) {
 		Enemy e;
 		
 	}
 	*/
-	public Player loadPlayer(Element playerElem) {
+	
+	public static Player loadPlayer(Element playerElem) {
 		Player p;
+		NodeList nodeList = playerElem.getElementsByTagName("SpriteSheet");
 		
+		return p;
+	}
+	
+	/*
+	public static Entity[] loadEntities(String document)
+	{
+		//JakeistoImplement~!
+	}
+	*/
+	
+	public static Player loadPlayer(String name, String document)
+	{
+		Document d = loadDoc(document);
+		//Character might change.
+		NodeList entities = d.getElementsByTagName("Character");
+		Player p = null;
+		for(int i = 0; i < entities.getLength(); i++)
+		{
+			if(((Element) entities.item(i)).getAttribute("name").equals(name))
+			{
+				if( ((Element)entities.item(i)).getAttribute("entityType").equals("Player"))
+				{
+					p = loadPlayer(((Element)entities.item(i)));
+				}
+			}
+		}
+		return p;
 	}
 }
