@@ -3,10 +3,10 @@ package megaclone;
 import java.util.Scanner;
 
 public class Player extends Entity{
-	private  Input i; 
+	private Input i; 
 	public Player(SpriteSheet spriteDB, Input i){
 		super(spriteDB);
-		this.i =i; 
+		this.setI(i); 
 	}
 	
 	
@@ -61,6 +61,16 @@ public class Player extends Entity{
 		 {
 			 setCurrentSprite(key);
 		 }
+	}
+
+
+	public Input getI() {
+		return i;
+	}
+
+
+	public void setI(Input i) {
+		this.i = i;
 	}
 	
 }
