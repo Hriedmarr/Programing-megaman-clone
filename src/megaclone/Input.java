@@ -12,6 +12,11 @@ public class Input {
 		private Player p;
 		private final Set<Integer> pressed = new HashSet<Integer>();
 		
+		public InputHandler(Player p)
+		{
+			this.p = p;
+		}
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			//I sense a disturbance in the force. Not sure how to deal with it.
@@ -21,10 +26,16 @@ public class Input {
 				for(Integer k : pressed)
 				{
 					if(k == KeyEvent.VK_LEFT){
-						p.setMoveX(p.getMoveX() - 2);
+						if(Math.abs(p.getMoveX()) <= 2)
+						{
+							p.setMoveX(p.getMoveX() - 2);
+						}
 					}
 					if(k == KeyEvent.VK_RIGHT){
-						p.setMoveX(p.getMoveX() + 2);
+						if(Math.abs(p.getMoveX()) <= 2)
+						{
+							p.setMoveX(p.getMoveX() + 2);
+						}
 					}
 					if(k == KeyEvent.VK_SPACE){
 					// later
@@ -36,10 +47,16 @@ public class Input {
 			}
 			//Checks for opposing inputs
 			if(key == KeyEvent.VK_LEFT && pressed.contains(KeyEvent.VK_RIGHT)){
-				p.setMoveX(p.getMoveX() - 2); 
+				if(Math.abs(p.getMoveX()) <= 2)
+				{
+					p.setMoveX(p.getMoveX() - 2);
+				}
 			}
 			if(key == KeyEvent.VK_RIGHT && pressed.contains(KeyEvent.VK_LEFT)){
-				p.setMoveX(p.getMoveX() + 2);
+				if(Math.abs(p.getMoveX()) <= 2)
+				{
+					p.setMoveX(p.getMoveX() - 2);
+				}
 			}
 		}
 			
@@ -51,5 +68,17 @@ public class Input {
 		@Override
 		public void keyTyped(KeyEvent e) {}
 		
+	}
+	
+	private InputHandler handler;
+	
+	public Input(Player p)
+	{
+		handler = new InputHandler(p);
+	}
+	
+	public InputHandler getHandler()
+	{
+		return handler;
 	}
 }
