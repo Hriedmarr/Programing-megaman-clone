@@ -26,12 +26,11 @@ public class Game {
 	
 	public void run()
 	{
-		
+		World world = new World(gFrame);
+		long time;
 		while(isRunning)
 		{
-			
-			
-			long time = System.currentTimeMillis();
+			time = System.currentTimeMillis();
 			
 			
 			
