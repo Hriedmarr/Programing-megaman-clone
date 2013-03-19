@@ -9,7 +9,10 @@ public class SpriteSheet {
 	{
 		spriteDB = new TreeMap<String, Sprite>();
 	}
-	
+	/*
+	 * Figure out default stuff?
+	 * 
+	 */
 	public void addSprite(String key, Sprite sprite)
 	{
 		if(spriteDB.isEmpty())

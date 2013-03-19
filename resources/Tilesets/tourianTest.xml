@@ -1,5 +1,4 @@
 <tileset name="tourianTest" src="Resources/TileSets/tourianTestTiles.xml">
-	<tile index="-1" solid="0, 0, 0, 0"/>
 	<tile index="23" solid="1, 1, 1, 1"/>
 	<tile index="24" solid="1, 1, 1, 1"/>
 	<tile index="25" solid="1, 1, 1, 1"/>

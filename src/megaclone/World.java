@@ -3,28 +3,23 @@ package megaclone;
 public class World {
 
 	private GameFrame frame;
-	
-	
-	//Temporary
+	private Room room;
 	private Player p;
 	
 	public World(GameFrame frame)
 	{
 		this.frame = frame;
+		//For now, load with debugmode
+		debugMode();
+		//connect Input.
+		connectInput(p);
+		//put player in debugroom
+		room.setPlayer(p);
 	}
 	
-	public void init()
+	public void update(GameFrame g)
 	{
-		
-	}
-	
-	
-	
-	
-	
-	public void update()
-	{
-		
+		room.update(g);
 	}
 	
 	public void connectInput(Player p)
@@ -34,6 +29,7 @@ public class World {
 	
 	public void debugMode()
 	{
-		p = ResourceLoader.loadPlayer("Geminga", "Resources/");
+		p = ResourceLoader.loadPlayer("Geminga", "Resources/CharDB.xml");
+		room = ResourceLoader.loadRoom("Resources/Areas/Debug.xml", "Resources/Tilesets/tourianTest.xml");
 	}
 }

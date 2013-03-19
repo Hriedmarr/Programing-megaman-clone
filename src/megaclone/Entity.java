@@ -8,6 +8,7 @@ public abstract class Entity extends Collideable{
 	protected SpriteSheet spriteDB;
 	private Sprite currentSprite;
 	protected String currentSpriteKey;
+	protected long timeLastUpdated;
 	//Temporary constructor, may change to diff constructor.
 	/*
 	 *	requires location still	
@@ -18,19 +19,19 @@ public abstract class Entity extends Collideable{
 		//still temporary.
 		super(200, 200, 0, 0);
 		this.spriteDB = spriteDB;
-		setCurrentSprite(spriteDB.getSprite("default"));
+		setCurrentSprite("0:5");
 
 		
 	}
 	
-	public void update(GameFrame g, long timeLastUpdated)
+	public void update(GameFrame g, Room room)
 	{
-		/*
-		 * okie, collision will go here laterz
-		 */
+		//Collision
+		room.collisions(this);
 		
 		spriteChange();
-		currentSprite.update(g, x, y, timeLastUpdated);
+		currentSprite.update(g, x, y);
+		timeLastUpdated = System.currentTimeMillis();
 		move();
 	}
 	
@@ -46,23 +47,40 @@ public abstract class Entity extends Collideable{
 		
 		if(boundingBoxCollision(c))
 		{
-			if(moveXH + x > x) // Right
+			//Make sure all functions called result in changing the movex and movey
+			if(c instanceof Tile)
 			{
-				moveXH = c.getX() - x - w;
-			}
-			if(moveXH + x < x) // Left
-			{
-				moveXH = c.getX() - x + c.getW();
-			}
-			if(moveYH + y < y) // Down
-			{
-				moveYH = c.getY() - y - h;
-			}
-			if(moveYH + y > y) // Up
-			{
-				moveYH = c.getY() - y + c.getH();
+				resolveTileCollision((Tile)c, moveXH, moveYH);
 			}
 		}
+	}
+	
+	public void resolveTileCollision(Tile c, int moveXH, int moveYH)
+	{
+		if(c.getSolid() == null)
+		{
+			return;
+		}
+		if(moveYH + y < c.getY() && c.getSolid()[0]) // Down
+		{
+			moveYH = c.getY() - y - h;
+		}
+		if(moveYH + y > c.getY() + c.getH() && c.getSolid()[2]) // Up
+		{
+			moveYH = c.getY() - y + c.getH();
+		}
+		if(moveXH + x > c.getX() && c.getSolid()[3]) // Right
+		{
+			moveXH = c.getX() - x - w;
+		}
+		if(moveXH + x < c.getX() + c.getW() && c.getSolid()[1]) // Left
+		{
+			moveXH = c.getX() - x + c.getW();
+		}
+		
+		
+		moveX = moveXH;
+		moveY = moveYH;
 	}
 	
 	public Sprite getCurrentSprite()
