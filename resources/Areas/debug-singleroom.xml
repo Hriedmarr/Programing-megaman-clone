@@ -1,0 +1,8 @@
+<room name = "debug-singleroom">
+	<!-- at scale 1: 1 screen is x40tiles y30tiles !-->
+	<tileset name = "tourianTest" />
+	<map xsize = "40" ysize = "30">
+		<!-- Don't use this ! -->
+		<object type="blockArea" xloc="0" yloc="23" xsize="40" ysize = "3" tiletype = "0" tileshape = "box-full-full-def"/>
+	</map>
+</room>

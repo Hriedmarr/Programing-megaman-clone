@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Player extends Entity{
 	private Input i; 
-	public Player(SpriteSheet spriteDB, Input i){
+	public Player(SpriteSheet spriteDB){
 		super(spriteDB);
-		this.setI(i); 
+		this.setI(new Input(this)); 
 	}
 	
 	
-	public void update(GameFrame g, long timeLastUpdated)
+	public void update(GameFrame g, Room room)
 	{
+		i.update();
 		
 		
-		
-		super.update(g, timeLastUpdated);
+		super.update(g, room);
 	}
 	
 	/*
@@ -35,10 +35,15 @@ public class Player extends Entity{
 		Scanner scan = new Scanner(currentSpriteKey);
 		//should avoid flying exceptions.
 		scan.useDelimiter(":");
-		 int s = scan.nextInt();
-		 int d = scan.nextInt();;
-		 
+		
+		int s = scan.nextInt();
+		 int d = scan.nextInt();
+		
 		 //translation from input
+		 if(moveX == 0)
+		 {
+			 s = 0;
+		 }
 		 if(moveX != 0)
 		 {
 			 s = 1;

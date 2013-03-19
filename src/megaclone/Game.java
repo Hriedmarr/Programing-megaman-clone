@@ -21,7 +21,7 @@ public class Game {
 		fps = 30;
 		xS = 600;
 		yS = 800;
-		gFrame = new GameFrame(600, 800, "MMClone(Temporary name)");
+		gFrame = new GameFrame(640, 480, "MMClone(Temporary name)");
 	}
 	
 	public void run()
@@ -34,7 +34,10 @@ public class Game {
 			
 			
 			
+			world.update(gFrame);
 			
+			//GameFrame updates
+			gFrame.update();
 			//delay
 			
 			time = (1000/fps) - (System.currentTimeMillis() - time);
@@ -57,7 +60,8 @@ public class Game {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		Game game = new Game();
+		game.run();
 	}
 	
 	
