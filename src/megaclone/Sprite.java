@@ -14,6 +14,7 @@ public class Sprite {
 	private int animSpeed;
 	private int currentFrame;
 	private boolean inReverse;
+	private long timeLastUpdated;
 	
 	//Temporary constructor.
 	public Sprite(int width, int height, BufferedImage[] frames, RepeatMode repMode, int animSpeed)
@@ -24,14 +25,15 @@ public class Sprite {
 		this.repMode = repMode;
 		this.animSpeed = animSpeed;
 		currentFrame = 0;
+		
 	}
 
-	public void update(GameFrame g, double x, double y, long timeLastUpdated)
+	public void update(GameFrame g, double x, double y)
 	{
 		if(System.currentTimeMillis() - timeLastUpdated >= animSpeed)
 		{
 			advanceFrame();
-			//Trying new thing with passing the long in order to consolidate sprite object size.
+			timeLastUpdated = System.currentTimeMillis();
 		}
 		g.getBBGraphics2D().drawImage(frames[currentFrame], ((int)x), ((int)y), g);
 	}

@@ -9,12 +9,16 @@ public class Input {
 
 	public class InputHandler implements KeyListener
 	{
-		private Player p;
+		//Handles directional commands
+		private int xMove;
+		//Handles other commands
+		private boolean[] cmds;
+		
 		private final Set<Integer> pressed = new HashSet<Integer>();
 		
-		public InputHandler(Player p)
+		public InputHandler()
 		{
-			this.p = p;
+			cmds = new boolean[2];
 		}
 		
 		@Override
@@ -26,15 +30,15 @@ public class Input {
 				for(Integer k : pressed)
 				{
 					if(k == KeyEvent.VK_LEFT){
-						if(Math.abs(p.getMoveX()) <= 2)
+						if(xMove <= 4)
 						{
-							p.setMoveX(p.getMoveX() - 2);
+							xMove = -4;
 						}
 					}
 					if(k == KeyEvent.VK_RIGHT){
-						if(Math.abs(p.getMoveX()) <= 2)
+						if(xMove >= -4)
 						{
-							p.setMoveX(p.getMoveX() + 2);
+							xMove = 4;
 						}
 					}
 					if(k == KeyEvent.VK_SPACE){
@@ -47,34 +51,60 @@ public class Input {
 			}
 			//Checks for opposing inputs
 			if(key == KeyEvent.VK_LEFT && pressed.contains(KeyEvent.VK_RIGHT)){
-				if(Math.abs(p.getMoveX()) <= 2)
+				if(xMove <= 4)
 				{
-					p.setMoveX(p.getMoveX() - 2);
+					xMove = -4;
 				}
 			}
 			if(key == KeyEvent.VK_RIGHT && pressed.contains(KeyEvent.VK_LEFT)){
-				if(Math.abs(p.getMoveX()) <= 2)
+				if(xMove >= -4)
 				{
-					p.setMoveX(p.getMoveX() - 2);
+					xMove = 4;
 				}
 			}
+			e.consume();
 		}
 			
 		@Override
 		public void keyReleased(KeyEvent e) {
 			pressed.remove(e.getKeyCode());
+			if(pressed.size() < 1)
+			{
+				xMove = 0;
+			}
+			e.consume();
 		}
 
 		@Override
 		public void keyTyped(KeyEvent e) {}
 		
+		public int getXMove()
+		{
+			return xMove;
+		}
+		
+		public boolean[] getCmds()
+		{
+			return cmds;
+		}
 	}
+
 	
 	private InputHandler handler;
 	
+	private Player p;
+	
+	
+	public void update()
+	{
+		p.setMoveX(handler.getXMove());
+	}
+	
 	public Input(Player p)
 	{
-		handler = new InputHandler(p);
+		handler = new InputHandler();
+		this.p = p;
+			
 	}
 	
 	public InputHandler getHandler()

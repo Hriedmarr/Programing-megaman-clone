@@ -1,0 +1,2 @@
+<!-- at scale 1: 1 screen is x40tiles y30tiles !-->
+<object type="blockArea" xloc="loc" yloc="loc" size="size" patternType="singleTile" pattern="patternName" >
