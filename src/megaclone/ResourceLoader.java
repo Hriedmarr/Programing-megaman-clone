@@ -3,6 +3,8 @@ package megaclone;
 import javax.imageio.ImageIO;
 import javax.xml.parsers.*;
 import javax.xml.*;
+
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -267,7 +269,15 @@ public class ResourceLoader {
 	        	//Cutting...
 	        	//Either hold on to this for later or just make it simpler
 				//System.out.println("This worked, I think" + array[1] + " " + array[0]);
-	        	int count = 0;
+	        	
+	        	//Makes a black default tile.
+	        	BufferedImage holdDefault = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+	        	holdDefault.getGraphics().setColor(Color.BLACK);
+	        	holdDefault.getGraphics().drawRect(0, 0, 16, 16);
+	        	tileDB.put(0, new TileData(holdDefault, 0));
+	        	
+	        	
+	        	int count = 1;
 	        	for(int k = 0; k < array[1]; k++)
 	        	{
 					//System.out.println("This worked, I think");
