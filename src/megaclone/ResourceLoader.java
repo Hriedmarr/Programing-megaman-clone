@@ -17,13 +17,13 @@ public class ResourceLoader {
 	 * Initializes a file's name with the String parameter, then parses the file.
 	 * 
 	 * The DocumentBuilder variable is part of a process to parse the XML document 
-	 * with a DOM parser. The variable dbis used to parse the created File into a 
+	 * with a DOM parser. The variable db is used to parse the created File into a 
 	 * Document. From there the Document variable is accessed to obtain its element, 
 	 * then normalized.
 	 * @param doc is used to access specific data files that other methods will pass in.
 	 * @return d is a successfully parsed XML file
 	 */
-	public Document loadDoc(String doc) {
+	public static Document loadDoc(String doc) {
 		File resource = new File(doc);
 		DocumentBuilder db;
 		try {
@@ -43,11 +43,17 @@ public class ResourceLoader {
 	 * @param sheetTemplate is an XML Element that has various attributes
 	 * @return ret is a SpriteSheet class which uses the XML's attributes to add a new sprite
 	 */
-	public SpriteSheet loadSpriteSheet(Element sheetTemplate) {
+	public static SpriteSheet loadSpriteSheet(Element sheetTemplate) {
+		//Load data from sheet template
+		String ssName = sheetTemplate.getAttribute("name");
+		String ssSizeT = sheetTemplate.getAttribute("sizeT");
+		String ssSizeST = sheetTemplate.getAttribute("sizeST");
 		String ssSrc = sheetTemplate.getAttribute("src");
 		Document d = loadDoc(ssSrc);
 		NodeList nodes = d.getElementsByTagName("sprite");
-		NodeList sNodeList = sheetTemplate.getChildNodes();
+		//Set up the spritesheet
+		NodeList sNodeList = sheetTemplate.getElementsByTagName("sprite");
+		//Make the spritesheet here!
 		SpriteSheet ret = new SpriteSheet();
 		for(int i = 0; i < sNodeList.getLength(); i++) {
 			Element sNode = (Element)sNodeList.item(i);
@@ -56,8 +62,10 @@ public class ResourceLoader {
 			String subType = sNode.getAttribute("subType");
 			for(int j = 0; j < nodes.getLength(); j++) {
 				Element node = (Element)nodes.item(j);
-				if(sName.equals(node)) {
+				if(sName.equals(node.getAttribute("name"))) {
 					ret.addSprite(type+":"+subType, loadSprite(node));
+					//load and add to the sprite sheet
+					//key is type + ":" + subType
 				}	
 			}
 		}
@@ -84,50 +92,50 @@ public class ResourceLoader {
 	 * @param spriteElem XML Element holding ChildNodes whose attributes are needed.
 	 * @return new Sprite instance, where the XML file data is entered
 	 */
-	public Sprite loadSprite(Element spriteElem) {
-		NodeList nodec = spriteElem.getChildNodes();
+	public static Sprite loadSprite(Element spriteElem) {
+		NodeList nodec = spriteElem.getElementsByTagName("image");
 		Element imageNode = (Element)nodec.item(0);
 		String imageFile = imageNode.getAttribute("file");
-		Element node = (Element)imageNode.getChildNodes().item(0);
+		Element node = (Element)imageNode.getElementsByTagName("grid").item(0);
 		String post = node.getAttribute("pos");
 		String sizet = node.getAttribute("size");
 		String arrayt = node.getAttribute("array");
 		String spacingt = node.getAttribute("spacing");
-		
+
 		int[] pos = new int[2];
 		int[] size = new int[2];
 		int[] array = new int[2];
 		int[] spacing = new int[2];
-		
+
 		Scanner scan = new Scanner(post);
 		scan.useDelimiter(",\\s*");
 		if(scan.hasNextInt())
 			pos[0] = scan.nextInt();
 		if(scan.hasNextInt())
 			pos[1] = scan.nextInt();
-		
-		Scanner scan2 = new Scanner(sizet);
-		scan2.useDelimiter(",\\s*");
-		if(scan2.hasNextInt())
+
+		scan = new Scanner(sizet);
+		scan.useDelimiter(",\\s*");
+		if(scan.hasNextInt())
 			size[0] = scan.nextInt();
-		if(scan2.hasNextInt())
+		if(scan.hasNextInt())
 			size[1] = scan.nextInt();
-		
-		Scanner scan3 = new Scanner(arrayt);
-		scan3.useDelimiter(",\\s*");
-		if(scan3.hasNextInt())
+
+		scan = new Scanner(arrayt);
+		scan.useDelimiter(",\\s*");
+		if(scan.hasNextInt())
 			array[0] = scan.nextInt();
-		if(scan3.hasNextInt())
+		if(scan.hasNextInt())
 			array[1] = scan.nextInt();
-		
-		Scanner scan4 = new Scanner(spacingt);
-		scan4.useDelimiter(",\\s*");
-		if(scan4.hasNextInt())
+
+		scan = new Scanner(spacingt);
+		scan.useDelimiter(",\\s*");
+		if(scan.hasNextInt())
 			spacing[0] = scan.nextInt();
-		if(scan4.hasNextInt())
+		if(scan.hasNextInt())
 			spacing[1] = scan.nextInt();
-		
-		Element animNode = (Element)nodec.item(1);		
+
+		Element animNode = (Element)spriteElem.getElementsByTagName("animation").item(0);		
 		Sprite.RepeatMode repMode;
 		if(animNode.getAttribute("repMode").equals("loop")) {
 			repMode = Sprite.RepeatMode.loop;
@@ -149,14 +157,221 @@ public class ResourceLoader {
 					frames[i + (j * array[0])] = source.getSubimage(pos[0] + (i * (size[0] + spacing[0])), pos[1] + (j * (size[1] + spacing[1])), size[0], size[1]);
 				}
 			}
-			System.out.println(size[0] +" "+ size[1]+" "+ frames.length+" "+ repMode.toString()+" "+ speed);
 			return new Sprite(size[0], size[1], frames, repMode, speed);
-			
+
 		}
 		catch(java.io.IOException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+	}
+	public static TileSet loadTileSet(String doc) {
+		Document solids = loadDoc(doc);
+		String hold = ((Element)solids.getElementsByTagName("tileset").item(0)).getAttribute("src");
+		Document d = loadDoc(hold);
+
+		NodeList nodes = d.getElementsByTagName("tileset");
+			Element node = (Element)nodes.item(0);
+			String imageFile = ((Element)node.getElementsByTagName("image").item(0)).getAttribute("file");
+	        Element sheetNode = ((Element)((Element)node.getElementsByTagName("image").item(0)).getElementsByTagName("grid").item(0));
+	        String posS = sheetNode.getAttribute("pos");
+	        String sizeS = sheetNode.getAttribute("size");
+	        String arrayS = sheetNode.getAttribute("array");
+	        String spacingS = sheetNode.getAttribute("spacing");
+	        Scanner scan;
+
+	        scan = new Scanner(posS).useDelimiter(",\\s*");
+
+	        int[] pos = new int[2];
+	        int j = 0;
+	        while(scan.hasNext())
+	        {
+	            if(scan.hasNextInt())
+	            {
+	                pos[j] = scan.nextInt();
+	                j++;
+	            }
+	            else
+	            {
+	                scan.next();
+	            }
+	        }
+
+			//System.out.println(pos[0] + " " + pos[1]);
+
+	        scan = new Scanner(sizeS).useDelimiter(",\\s*");;
+	        int[] size = new int[2];
+	        j = 0;
+	        while(scan.hasNext())
+	        {
+	            if(scan.hasNextInt())
+	            {
+	                size[j] = scan.nextInt();
+	                j++;
+	            }
+	            else
+	            {
+	                scan.next();
+	            }
+	        }
+
+			//System.out.println(size[0] + " " + size[1]);
+
+	        scan = new Scanner(arrayS).useDelimiter(",\\s*");;
+	        int[] array = new int[2];
+	        j = 0;
+	        while(scan.hasNext())
+	        {
+	            if(scan.hasNextInt())
+	            {
+	                array[j] = scan.nextInt();
+	                j++;
+	            }
+	            else
+	            {
+	                scan.next();
+	            }
+	        }
+
+			//System.out.println(array[0] + " " + array[1]);
+
+	        scan = new Scanner(spacingS).useDelimiter(",\\s*");;
+	        int[] spacing = new int[2];
+	        j = 0;
+	        while(scan.hasNext())
+	        {
+	            if(scan.hasNextInt())
+	            {
+	                spacing[j] = scan.nextInt();
+	                j++;
+	            }
+	            else
+	            {
+	                scan.next();
+	            }
+	        }
+
+			//System.out.println(spacing[0] + " " + spacing[1]);
+
+	        //Loading Image
+	        //System.out.println(imageFile);
+	        File imgFile = new File(imageFile);
+	        //frames = new BufferedImage[array[0]*array[1]];
+	        BufferedImage source;
+	        TreeMap<Integer, TileData> tileDB = new TreeMap<Integer, TileData>();
+	        try
+	        {
+	        	source = ImageIO.read(imgFile);
+	        	//Cutting...
+	        	//Either hold on to this for later or just make it simpler
+				//System.out.println("This worked, I think" + array[1] + " " + array[0]);
+	        	int count = 0;
+	        	for(int k = 0; k < array[1]; k++)
+	        	{
+					//System.out.println("This worked, I think");
+	        	    for(int l = 0; l < array[0]; l++)
+	        	    {
+	        	        //frames[i + (j * array[0])] = source.getSubimage(pos[0] + (i * (size[0] + spacing[0])), pos[1] + (j * (size[1] + spacing[1])), size[0], size[1]);
+
+	        	    	//hopefully this works...
+	        	    	TileData t = new TileData(source.getSubimage(pos[0] + (l * (size[0] + spacing[0])), pos[1] + (k * (size[1] + spacing[1])), size[0], size[1]), tileDB.size());
+	        	    	if(t != null)
+	        	    	{
+	        	    		tileDB.put(new Integer(count), t);
+	        	    		count++;
+	        	    	}
+	        	    	//System.out.println("This worked, I think");
+	        	    }
+	        	}
+	        }
+	        catch(java.io.IOException e)
+	        {
+	        	e.printStackTrace();
+	        	return null;
+	        }
+
+	        NodeList tileSolids = ((Element)solids.getElementsByTagName("tileset").item(0)).getElementsByTagName("tile");
+	        for(int i = 0; i < tileSolids.getLength(); i++)
+	        {
+	        	Element holdSolid = (Element)tileSolids.item(i);
+	        	boolean[] solidSides = new boolean[4];
+	        	String solidString = holdSolid.getAttribute("solid");
+	        	scan = new Scanner(solidString).useDelimiter(",\\s*");
+		        for(int k = 0; k < 4; k++)
+		        {
+		        	solidSides[j] = scan.nextInt() == 1;
+		        }
+		        int index = Integer.parseInt(holdSolid.getAttribute("index"));
+		        if(tileDB.get(index) != null)
+		        	tileDB.get(index).setIsSolid(solidSides);
+		        else
+		        {
+		        	System.out.println(index);
+		        }
+	        }
+
+	        TileSet ret = new TileSet(tileDB);
+
+
+		return ret;
+	}
+
+	public static Room loadRoom(String doc, String tileSetLoc)
+	{
+		TileSet tileSet = ResourceLoader.loadTileSet(tileSetLoc);
+
+		Document d = loadDoc(doc);
+
+		Element layerElem = (Element)d.getElementsByTagName("layer").item(0);
+
+		Tile[][] roomContents = new Tile[Integer.parseInt(layerElem.getAttribute("width"))][Integer.parseInt(layerElem.getAttribute("height"))];
+
+		NodeList x = layerElem.getElementsByTagName("data");
+		Element dataElemT = (Element)layerElem.getElementsByTagName("data").item(0);
+
+		//System.out.println(roomContents.length);
+		//System.out.println(roomContents[0].length);
+
+		int width = Integer.parseInt(layerElem.getAttribute("width"));
+		int height = Integer.parseInt(layerElem.getAttribute("height"));
+
+
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				roomContents[i][j] = new Tile(i * 16, j * 16);
+			}
+		}
+
+		Tile[] holdArray = new Tile[width];
+		int holdAInd = 0;
+		int lineCheck = 0;
+		NodeList holdTileData = dataElemT.getElementsByTagName("tile");
+		int chk2 = holdTileData.getLength();
+		for(int i = 0; i < holdTileData.getLength(); i++)
+		{
+			String hold = ((Element)holdTileData.item(i)).getAttribute("gid");
+			int holdID = Integer.parseInt( hold );
+			if(holdAInd < holdArray.length - 1)
+			{
+				holdArray[holdAInd] = new Tile(lineCheck * 16, holdAInd * 16, tileSet.getTileByID(holdID));
+				holdAInd++;
+			}
+			else if(holdAInd == holdArray.length - 1)
+			{
+				holdArray[holdAInd] = new Tile(lineCheck * 16, holdAInd * 16, tileSet.getTileByID(holdID));
+				holdAInd = 0;
+
+				//This had better work.
+
+				roomContents[lineCheck] = holdArray;
+				holdArray = new Tile[height];
+				lineCheck++;
+			}
+		}
+		Room ret = new Room(width, height, roomContents, tileSet);
+		return ret;
 	}
 	/**
 	 * Stores the attributes of an XML file which will be used for the Entity class
@@ -166,27 +381,38 @@ public class ResourceLoader {
 	 * @param entityElem XML Element holding attribute data.
 	 * @return ret an Entity instance where the XML data will be used.
 	 */
-	public Entity loadEntity(Element entityElem) {
-		Entity ret = null;
-		NodeList nodec = entityElem.getChildNodes();
-		Element charNode = (Element)nodec.item(0);
-		String idAtt = charNode.getAttribute("id");
-		String nameAtt = charNode.getAttribute("name");
-		String entity = charNode.getAttribute("entityType");
-		if(entity.equals("Player")) {
-			System.out.println("ITS A PLAYER");
-			ret = loadPlayer(nameAtt, idAtt);
-		}
-		if(entity.equals("Enemy")){System.out.println("ITS A PLAYER");}
-		return ret;
+	/*
+	public static Enemy loadEnemy(Element enemyElem) {
+		Enemy e;
 		
 	}
-	public static Player loadPlayer(String name, String document) {
+	*/
+
+	public static Player loadPlayer(Element playerElem) {
+		Player p = null;
+		NodeList nodeList = playerElem.getElementsByTagName("spritesheet");
+		SpriteSheet hold = loadSpriteSheet((Element)nodeList.item(0));
+		p = new Player(hold);
+		return p;
+	}
+
+	/*
+	public static Entity[] loadEntities(String document)
+	{
+		//JakeistoImplement~!
+	}
+	*/
+
+	public static Player loadPlayer(String name, String document)
+	{
 		Document d = loadDoc(document);
+		//Character might change.
 		NodeList entities = d.getElementsByTagName("Character");
 		Player p = null;
-		for(int i = 0; i < entities.getLength(); i++) {
-			if(((Element) entities.item(i)).getAttribute("name").equals(name)) {
+		for(int i = 0; i < entities.getLength(); i++)
+		{
+			if(((Element) entities.item(i)).getAttribute("name").equals(name))
+			{
 				if( ((Element)entities.item(i)).getAttribute("entityType").equals("Player"))
 				{
 					p = loadPlayer(((Element)entities.item(i)));
