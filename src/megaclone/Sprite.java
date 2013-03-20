@@ -1,5 +1,9 @@
 package megaclone;
-
+/**
+ * @author Kyle Picinich
+ * @version 0.5
+ * @since 2013 - 03 - 09
+ */
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;

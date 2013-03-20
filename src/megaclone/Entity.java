@@ -34,7 +34,7 @@ public abstract class Entity extends Collideable{
 		move();
 	}
 	
-	/**
+	/*
 	 * Method to allow for spritechanging to occur in the update of this class AFTER collision.
 	 */
 	public abstract void spriteChange();
