@@ -1,5 +1,6 @@
 package megaclone;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 /**
  * @author Kyle Picinich
@@ -18,7 +19,7 @@ public class SpriteSheet {
 	/**
 	 * adds sprites to the sprite database depending on if the database is empty or
 	 * if the database has a key made
-	 */
+	 * */
 	public void addSprite(String key, Sprite sprite)
 	{
 		if(spriteDB.isEmpty())
@@ -54,4 +55,15 @@ public class SpriteSheet {
 		}
 	}
 	
+	public ArrayList<String> getSprites()
+	{
+		ArrayList<String> ret = new ArrayList<String>();
+		
+		for(String s : spriteDB.navigableKeySet())
+		{
+			ret.add(s);
+		}
+		
+		return ret;
+	}
 }

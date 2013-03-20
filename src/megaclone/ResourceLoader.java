@@ -1,10 +1,15 @@
 package megaclone;
+
 import javax.imageio.ImageIO;
 import javax.xml.parsers.*;
 import javax.xml.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.util.TreeMap;
+
 import org.w3c.dom.*;
 /**
  * @author Jake Eason
@@ -34,6 +39,7 @@ public class ResourceLoader {
 		}catch(Exception ex) {ex.printStackTrace();}
 		return null;
 	}	
+
 	/**
 	 * Loads a XML file with multiple sprites for use in a SpriteSheet class.
 	 * 
@@ -113,28 +119,24 @@ public class ResourceLoader {
 			pos[0] = scan.nextInt();
 		if(scan.hasNextInt())
 			pos[1] = scan.nextInt();
-
 		scan = new Scanner(sizet);
 		scan.useDelimiter(",\\s*");
 		if(scan.hasNextInt())
 			size[0] = scan.nextInt();
 		if(scan.hasNextInt())
 			size[1] = scan.nextInt();
-
 		scan = new Scanner(arrayt);
 		scan.useDelimiter(",\\s*");
 		if(scan.hasNextInt())
 			array[0] = scan.nextInt();
 		if(scan.hasNextInt())
 			array[1] = scan.nextInt();
-
 		scan = new Scanner(spacingt);
 		scan.useDelimiter(",\\s*");
 		if(scan.hasNextInt())
 			spacing[0] = scan.nextInt();
 		if(scan.hasNextInt())
 			spacing[1] = scan.nextInt();
-
 		Element animNode = (Element)spriteElem.getElementsByTagName("animation").item(0);		
 		Sprite.RepeatMode repMode;
 		if(animNode.getAttribute("repMode").equals("loop")) {
@@ -165,11 +167,11 @@ public class ResourceLoader {
 			return null;
 		}
 	}
+
 	public static TileSet loadTileSet(String doc) {
 		Document solids = loadDoc(doc);
 		String hold = ((Element)solids.getElementsByTagName("tileset").item(0)).getAttribute("src");
 		Document d = loadDoc(hold);
-
 		NodeList nodes = d.getElementsByTagName("tileset");
 			Element node = (Element)nodes.item(0);
 			String imageFile = ((Element)node.getElementsByTagName("image").item(0)).getAttribute("file");
@@ -181,7 +183,7 @@ public class ResourceLoader {
 	        Scanner scan;
 
 	        scan = new Scanner(posS).useDelimiter(",\\s*");
-
+	        
 	        int[] pos = new int[2];
 	        int j = 0;
 	        while(scan.hasNext())
@@ -199,7 +201,7 @@ public class ResourceLoader {
 
 			//System.out.println(pos[0] + " " + pos[1]);
 
-	        scan = new Scanner(sizeS).useDelimiter(",\\s*");;
+	        scan = new Scanner(sizeS).useDelimiter(",\\s*");
 	        int[] size = new int[2];
 	        j = 0;
 	        while(scan.hasNext())
@@ -310,32 +312,32 @@ public class ResourceLoader {
 		        }
 	        }
 
+	        
 	        TileSet ret = new TileSet(tileDB);
-
-
+	        
+		
 		return ret;
 	}
-
+	
 	public static Room loadRoom(String doc, String tileSetLoc)
 	{
 		TileSet tileSet = ResourceLoader.loadTileSet(tileSetLoc);
-
+		
 		Document d = loadDoc(doc);
-
+		
 		Element layerElem = (Element)d.getElementsByTagName("layer").item(0);
-
+		
 		Tile[][] roomContents = new Tile[Integer.parseInt(layerElem.getAttribute("width"))][Integer.parseInt(layerElem.getAttribute("height"))];
-
+		
 		NodeList x = layerElem.getElementsByTagName("data");
 		Element dataElemT = (Element)layerElem.getElementsByTagName("data").item(0);
-
+		
 		//System.out.println(roomContents.length);
 		//System.out.println(roomContents[0].length);
-
+		
 		int width = Integer.parseInt(layerElem.getAttribute("width"));
 		int height = Integer.parseInt(layerElem.getAttribute("height"));
-
-
+		
 		for(int i = 0; i < width; i++)
 		{
 			for(int j = 0; j < height; j++)
@@ -343,7 +345,6 @@ public class ResourceLoader {
 				roomContents[i][j] = new Tile(i * 16, j * 16);
 			}
 		}
-
 		Tile[] holdArray = new Tile[width];
 		int holdAInd = 0;
 		int lineCheck = 0;
@@ -363,8 +364,8 @@ public class ResourceLoader {
 				holdArray[holdAInd] = new Tile(lineCheck * 16, holdAInd * 16, tileSet.getTileByID(holdID));
 				holdAInd = 0;
 
-				//This had better work.
-
+				//This had better work
+				
 				roomContents[lineCheck] = holdArray;
 				holdArray = new Tile[height];
 				lineCheck++;
@@ -387,7 +388,6 @@ public class ResourceLoader {
 		
 	}
 	*/
-
 	public static Player loadPlayer(Element playerElem) {
 		Player p = null;
 		NodeList nodeList = playerElem.getElementsByTagName("spritesheet");
