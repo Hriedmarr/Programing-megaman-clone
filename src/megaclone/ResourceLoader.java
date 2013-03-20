@@ -273,7 +273,7 @@ public class ResourceLoader {
 	        	//Makes a black default tile.
 	        	BufferedImage holdDefault = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 	        	holdDefault.getGraphics().setColor(Color.BLACK);
-	        	holdDefault.getGraphics().drawRect(0, 0, 16, 16);
+	        	holdDefault.getGraphics().clearRect(0, 0, 16, 16);
 	        	tileDB.put(0, new TileData(holdDefault, 0));
 	        	
 	        	
@@ -337,7 +337,10 @@ public class ResourceLoader {
 		
 		Element layerElem = (Element)d.getElementsByTagName("layer").item(0);
 		
-		Tile[][] roomContents = new Tile[Integer.parseInt(layerElem.getAttribute("width"))][Integer.parseInt(layerElem.getAttribute("height"))];
+		int width = Integer.parseInt(layerElem.getAttribute("width"));
+		int height = Integer.parseInt(layerElem.getAttribute("height"));
+		
+		Tile[][] roomContents = new Tile[height][width];
 		
 		NodeList x = layerElem.getElementsByTagName("data");
 		Element dataElemT = (Element)layerElem.getElementsByTagName("data").item(0);
@@ -345,12 +348,11 @@ public class ResourceLoader {
 		//System.out.println(roomContents.length);
 		//System.out.println(roomContents[0].length);
 		
-		int width = Integer.parseInt(layerElem.getAttribute("width"));
-		int height = Integer.parseInt(layerElem.getAttribute("height"));
 		
-		for(int i = 0; i < width; i++)
+		
+		for(int i = 0; i < height; i++)
 		{
-			for(int j = 0; j < height; j++)
+			for(int j = 0; j < width; j++)
 			{
 				roomContents[i][j] = new Tile(i * 16, j * 16);
 			}
@@ -366,18 +368,18 @@ public class ResourceLoader {
 			int holdID = Integer.parseInt( hold );
 			if(holdAInd < holdArray.length - 1)
 			{
-				holdArray[holdAInd] = new Tile(lineCheck * 16, holdAInd * 16, tileSet.getTileByID(holdID));
+				holdArray[holdAInd] = new Tile(holdAInd * 16, lineCheck * 16, tileSet.getTileByID(holdID));
 				holdAInd++;
 			}
 			else if(holdAInd == holdArray.length - 1)
 			{
-				holdArray[holdAInd] = new Tile(lineCheck * 16, holdAInd * 16, tileSet.getTileByID(holdID));
+				holdArray[holdAInd] = new Tile(holdAInd * 16, lineCheck * 16, tileSet.getTileByID(holdID));
 				holdAInd = 0;
 
 				//This had better work
 				
 				roomContents[lineCheck] = holdArray;
-				holdArray = new Tile[height];
+				holdArray = new Tile[width];
 				lineCheck++;
 			}
 		}
