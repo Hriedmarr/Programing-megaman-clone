@@ -6,7 +6,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Input {
-
+	/*
+	 * This isn't done yet!!!
+	 * 
+	 */
 	public class InputHandler implements KeyListener
 	{
 		//Handles directional commands

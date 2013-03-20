@@ -1,5 +1,6 @@
 package megaclone;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class SpriteSheet {
@@ -43,4 +44,15 @@ public class SpriteSheet {
 		}
 	}
 	
+	public ArrayList<String> getSprites()
+	{
+		ArrayList<String> ret = new ArrayList<String>();
+		
+		for(String s : spriteDB.navigableKeySet())
+		{
+			ret.add(s);
+		}
+		
+		return ret;
+	}
 }
